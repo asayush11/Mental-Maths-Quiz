@@ -7,7 +7,7 @@ export default function Result({ score, answers, goHome }) {
       <ul className="text-left">
         {answers.map((ans, idx) => (
           <li key={idx} className="mb-2">
-            Q{idx + 1}: {ans.num1} {ans.op} {ans.num2} = {ans.correct}<br />
+            Q{idx + 1}: {ans.num1} {ans.op1} {ans.num2} {ans.op2} {ans.num3} {ans.op3} {ans.num4} = {ans.correct}<br />
             Your answer: <span className={ans.isCorrect ? 'text-green-600' : 'text-red-600'}>{ans.selected}</span>
           </li>
         ))}
