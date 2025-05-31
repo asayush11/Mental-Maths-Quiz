@@ -43,7 +43,7 @@ export default function Quiz({ questions, finishQuiz, goHome }) {
   const handleNext = () => {
     const newAnswerList = [...answerList, {
       ...q,
-      selected,
+      selected: null,
       isCorrect: false,
     }];
     setAnswerList(newAnswerList);
@@ -88,7 +88,7 @@ export default function Quiz({ questions, finishQuiz, goHome }) {
       <div className="flex justify-center space-x-4 mt-8">
         <button onClick={handleClear} className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Clear</button>
         <button onClick={handleSubmit} className="bg-green-600 space-x-4 text-white px-4 py-2 rounded hover:bg-green-700">Submit</button>
-        <button onClick={handleNext} className="bg-yellow-500  space-x-4 text-white px-4 py-2 rounded hover:bg-yellow-600">Next</button>
+        <button onClick={handleNext} className="bg-yellow-500  space-x-4 text-white px-4 py-2 rounded hover:bg-yellow-600">Skip</button>
       </div>
       
     </div>
