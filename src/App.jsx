@@ -15,21 +15,41 @@ function App() {
     for (let i = 0; i < 20; i++) {
       const num1 = Math.floor(Math.random() * 100) + 1;
       const num2 = Math.floor(Math.random() * 99) + 1;
-      const op = operations[Math.floor(Math.random() * operations.length)];
-      let correct;
-      switch (op) {
-        case '+': correct = num1 + num2; break;
-        case '-': correct = num1 - num2; break;
-        case '*': correct = num1 * num2; break;
-        case '/': correct = parseFloat((num1 / num2).toFixed(2)); break;
+      const num3 = Math.floor(Math.random() * 100) + 1;
+      const num4 = Math.floor(Math.random() * 99) + 1;
+      const op1 = operations[Math.floor(Math.random() * operations.length)];
+      const op2 = operations[Math.floor(Math.random() * operations.length)];
+      const op3 = operations[Math.floor(Math.random() * operations.length)];
+
+      const nums = [num1, num2, num3, num4];
+      const ops = [op1, op2, op3];
+
+      for (let i = 0; i < ops.length; i++) {
+        if (ops[i] === '*' || ops[i] === '/') {
+           const result = ops[i] === '*'
+            ? nums[i] * nums[i + 1]
+            : parseFloat(( nums[i] / nums[i + 1]).toFixed(2));
+            nums.splice(i, 2, result); 
+            ops.splice(i, 1);          
+            i--; 
+        } 
       }
+
+  
+    let correct = parseFloat((nums[0]).toFixed(2));
+       for (let i = 0; i < ops.length; i++) {
+       correct = ops[i] === '+'
+      ? correct + parseFloat((nums[i + 1]).toFixed(2))
+      : correct - parseFloat((nums[i + 1]).toFixed(2));
+      }
+      correct = parseFloat((correct).toFixed(2));
       const options = [correct];
       while (options.length < 4) {
         const wrong = correct + (Math.random() * 20 - 10);
         const rounded = parseFloat(wrong.toFixed(2));
         if (!options.includes(rounded)) options.push(rounded);
       }
-      generated.push({ num1, num2, op, correct, options: shuffle(options) });
+      generated.push({ num1, num2, num3, num4, op1, op2, op3, correct, options: shuffle(options) });
     }
     return generated;
   };

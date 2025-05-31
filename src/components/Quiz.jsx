@@ -5,7 +5,7 @@ export default function Quiz({ questions, finishQuiz, goHome }) {
   const [selected, setSelected] = useState(null);
   const [answerList, setAnswerList] = useState([]);
   const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(30);
+  const [timeLeft, setTimeLeft] = useState(45);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -32,7 +32,7 @@ export default function Quiz({ questions, finishQuiz, goHome }) {
     }];
     setScore(newScore);
     setAnswerList(newAnswerList);
-    alert(correct ? 'Correct!' : `Wrong! Correct answer: ${q.correct}`);
+    //alert(correct ? 'Correct!' : `Wrong! Correct answer: ${q.correct}`);
     handleUpdate(newScore, newAnswerList);
   };
 
@@ -40,7 +40,7 @@ export default function Quiz({ questions, finishQuiz, goHome }) {
     setSelected(null);
   };
 
-  const handleNext = () => {
+  const handleSkip = () => {
     const newAnswerList = [...answerList, {
       ...q,
       selected: null,
@@ -52,7 +52,7 @@ export default function Quiz({ questions, finishQuiz, goHome }) {
 
   const handleUpdate = (newScore, newAnswerList) => {
     setSelected(null);
-    setTimeLeft(30);
+    setTimeLeft(45);
     if (current === questions.length - 1) {
       finishQuiz(newScore, newAnswerList);
     } else {
@@ -69,7 +69,7 @@ export default function Quiz({ questions, finishQuiz, goHome }) {
         <span>Time left: {timeLeft}s</span>
         <span><button onClick={goHome} className="mt-4 text-blue-700 underline">Home</button></span>
       </div>
-      <h2 className="text-2xl mb-4">{q.num1} {q.op} {q.num2} = ?</h2>
+      <h2 className="text-2xl mb-4">{q.num1} {q.op1} {q.num2} {q.op2} {q.num3} {q.op3} {q.num4} = ?</h2>
       <div className="flex flex-col space-y-4 mt-6">
         {q.options.map((option, index) => (
         <label key={index} className="flex items-center space-x-2">
@@ -88,7 +88,7 @@ export default function Quiz({ questions, finishQuiz, goHome }) {
       <div className="flex justify-center space-x-4 mt-8">
         <button onClick={handleClear} className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Clear</button>
         <button onClick={handleSubmit} className="bg-green-600 space-x-4 text-white px-4 py-2 rounded hover:bg-green-700">Submit</button>
-        <button onClick={handleNext} className="bg-yellow-500  space-x-4 text-white px-4 py-2 rounded hover:bg-yellow-600">Skip</button>
+        <button onClick={handleSkip} className="bg-yellow-500  space-x-4 text-white px-4 py-2 rounded hover:bg-yellow-600">Skip</button>
       </div>
       
     </div>
